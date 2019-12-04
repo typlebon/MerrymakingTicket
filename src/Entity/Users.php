@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -27,7 +28,7 @@ class Users
     private $firstname_users;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=10)
      */
     private $phone_number_users;
 
@@ -41,16 +42,22 @@ class Users
         return $this->id;
     }
 
-    public function getname_users (): ?string
+    public function getname_users(): ?string
     {
         return $this->name_users;
     }
+
 
     public function setNameUsers(string $name_users): self
     {
         $this->name_users = $name_users;
 
         return $this;
+    }
+
+    public function getSlug()
+    {
+        return (new Slugify())->slugify($this->name_users);
     }
 
     public function getfirstname_users(): ?string
@@ -65,12 +72,12 @@ class Users
         return $this;
     }
 
-    public function getphone_number_users(): ?int
+    public function getphone_number_users(): ?string
     {
         return $this->phone_number_users;
     }
 
-    public function setPhoneNumberUsers(int $phone_number_users): self
+    public function setPhoneNumberUsers(string $phone_number_users): self
     {
         $this->phone_number_users = $phone_number_users;
 

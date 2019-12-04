@@ -57,6 +57,11 @@ class Place
 
         return $this;
     }
+    //fonction pour formater le prix 
+    public function getFormattedPrice(): 
+    {
+        return number_format($this->price,0,'',' ');
+    }
 
     public function getArtist(): ?string
     {

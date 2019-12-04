@@ -6,7 +6,7 @@ use App\Repository\RegistryInterface;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\QueryBuilder as DoctrineQueryBuilder;
 
 /**
@@ -39,7 +39,7 @@ class UsersRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
-    private function getQueryBuilder()
+    private function getQueryBuilder() : QueryBuilder
     {
         return $this->createQueryBuilder('u');
     }

@@ -5,19 +5,19 @@
 {% block body %}
 	<div class="container">
 		<h2>
-			Nos produits
+			Nos artistes
 			<h2>
 				<div class="row flex">
 					{% for property in users %}
 						<div class="col-3">
 							<div class="card">
 								<h5 class="card-title">
-									<a href="#">
+									<a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">
 										{{property.name_users}}
 										{{property.firstname_users}}</a>
 								</h5>
 								<p class="card-text">{{property.phone_number_users}}</p>
-								<p class="card-text">{{property.mail}}</p>
+								<div class="text-primary">{{property.mail}}</div>
 							</div>
 						</div>
 					</div>

@@ -32,12 +32,12 @@ class Event
     private $long_description_event;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=5)
      */
     private $ref_provider_event;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="decimal", precision=6, scale=2)
      */
     private $purchase_price_event;
 
@@ -97,12 +97,12 @@ class Event
         return $this;
     }
 
-    public function getRefProviderEvent(): ?int
+    public function getRefProviderEvent(): ?string
     {
         return $this->ref_provider_event;
     }
 
-    public function setRefProviderEvent(int $ref_provider_event): self
+    public function setRefProviderEvent(string $ref_provider_event): self
     {
         $this->ref_provider_event = $ref_provider_event;
 
