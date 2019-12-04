@@ -22,7 +22,7 @@ class PropertyController extends AbstractController
         $this->repository = $repository;
     }
     /**
-     * @Route("/biens", name="property.index")
+     * @Route("/biens", name="users.index")
      * @return Response
      */
     public function index(): Response
@@ -37,12 +37,12 @@ class PropertyController extends AbstractController
     }
 
     /**
-     * @Route("/biens/{slug}-{id}", name="property.show"), requierements={"slug": [a-z0-9\-]*"})
+     * @Route("/biens/{slug}-{id}", name="users.show"), requierements={"slug": [a-z0-9\-]*"})
      * @param Property $property
      * @return Response
      */
     //noms doivent correspondre à la route
-    public function show(Property $property, string $slug): Response
+    public function show(Users $property, string $slug): Response
     {
         if($property->getSlug() !== $slug){
             $this->redirectToRoute('property.show', [
