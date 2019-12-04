@@ -8,16 +8,16 @@
 			Nos artistes
 			<h2>
 				<div class="row flex">
-					{% for property in users %}
+					{% for users in users %}
 						<div class="col-3">
 							<div class="card">
 								<h5 class="card-title">
-									<a href="{{ path('users.show', {id: property.id, slug: property.slug}) }}">
-										{{property.name_users}}
-										{{property.firstname_users}}</a>
+									<a href="{{ path('users.show', {id: users.id, slug: users.slug}) }}">
+										{{users.name_users}}
+										{{users.firstname_users}}</a>
 								</h5>
-								<p class="card-text">{{property.phone_number_users}}</p>
-								<div class="text-primary">{{property.mail}}</div>
+								<p class="card-text">{{users.phone_number_users}}</p>
+								<div class="text-primary">{{users.mail}}</div>
 							</div>
 						</div>
 					</div>
