@@ -42,7 +42,7 @@ class Users
         return $this->id;
     }
 
-    public function getname_users(): ?string
+    public function getNameUsers(): ?string
     {
         return $this->name_users;
     }
@@ -60,7 +60,7 @@ class Users
         return (new Slugify())->slugify($this->name_users);
     }
 
-    public function getfirstname_users(): ?string
+    public function getFirstnameUsers(): ?string
     {
         return $this->firstname_users;
     }
@@ -72,7 +72,7 @@ class Users
         return $this;
     }
 
-    public function getphone_number_users(): ?string
+    public function getphoneNumberUsers(): ?string
     {
         return $this->phone_number_users;
     }

@@ -1,9 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-<div class="container">
-<h1> {{ users.name_users }} </h1>
-{% endblock %}
+{% block title users.nameUsers %}
 
-{% block title %}
+{% block body %}
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8"></div>
+
+				<div class="col-md-4">
+					<h1>{{ users.nameUsers}}
+						-
+						{{users.firstnameUsers}}</h1>
+					<div class="text-primary" style"font-size: 4rem;font-weight: bold;">{{users.phoneNumberUsers}}
+					</div>
+					<a href="#" class="btn btn-primary">
+						Contactez l'utilisateur</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container mt-4">
+
+		<p>
+			Bonjour
+			{{users.firstnameUsers}}
+		</p>
+
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Informations utilisateur</h2>
+				<table class="table table-striped">
+					<tr>
+						<td>Nom</td>
+						<td>{{users.nameUsers}}</td>
+					</tr>
+					<tr>
+						<td>Prénom</td>
+						<td>{{users.firstnameUsers}}</td>
+					</tr>
+					<tr>
+						<td>Téléphone</td>
+						<td>{{users.phoneNumberUsers}}</td>
+					</tr>
+					<tr>
+						<td>mail</td>
+						<td>{{users.mail}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-4">
+				<h2>Droit administrateur</h2>
+			</div>
+		</div>
+	</div>
 {% endblock %}
