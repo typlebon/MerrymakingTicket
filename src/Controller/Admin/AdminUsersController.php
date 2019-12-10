@@ -11,6 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 // use Symfony\Component\Security\Core\Users;
 
@@ -50,20 +51,23 @@ class AdminUsersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($users);
             $this->em->flush();
+            //message de confirmation de modification
+            $this->addFlash('success', 'Création enregistré');
             //redirection
             return $this->redirectToRoute('admin.users.index');
         }
-        return $this->render('admin/users/new.html.twig', [
+        return $this->render('new.html.twig', [
             'users' => $users,
             'form' => $form->createView()
         ]);
     }
 
     /**
-     * @Route("/admin/users/{id}", name="admin.users.edit")
+     * @Route("/admin/users/{id}", name="admin.users.edit", methods="GET|POST")
      * @param Users $users
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    //Modification d'un utilisateur
     public function edit(Users $users, Request $request)
     {
         $form = $this->createForm(UsersType::class, $users);
@@ -71,6 +75,8 @@ class AdminUsersController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
+            //message de confirmation de modification
+            $this->addFlash('success', 'Modification enregistré');
             //redirection
             return $this->redirectToRoute('admin.users.index');
         }
@@ -79,5 +85,21 @@ class AdminUsersController extends AbstractController
             'users' => $users,
             'form' => $form->createView()
         ]);
+    }
+    /**
+     * @Route("/admin/users/{id}", name="admin.users.delete", methods="DELETE")
+     * @param Users $users
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    //Supression d'un utilisateur
+    public function delete(Users $users, Request $request)
+    {
+        if ($this->isCsrfTokenValid('delete' . $users->getId(), $request->get('_token'))) {
+            $this->em->remove($users);
+            $this->em->flush();
+            //message de confirmation de modification 
+            $this->addFlash('success', 'Suppression enregistré');
+        }
+        return $this->redirectToRoute('admin.users.index');
     }
 }

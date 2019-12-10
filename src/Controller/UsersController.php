@@ -21,7 +21,7 @@ class UsersController extends AbstractController
         $this->repository = $repository;
     }
     /**
-     * @Route("/biens", name="users.index")
+     * @Route("/concerts", name="users.index")
      * @return Response
      */
     public function index(): Response

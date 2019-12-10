@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
+// use App\Entity\Users;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * //permet d'avoir une valeur unique dans la BDD
+ * @UniqueEntity("mail")
  */
-class Users
+class Users implements UserInterface,\Serializable
 {
     /**
      * @ORM\Id()
@@ -19,23 +25,48 @@ class Users
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z ÁÀÂÄÃÅÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝÆÇáàâäãåéèêëíìîïñóòôöõúùûüýÿæç\'0-9,\.\-\_]{1,10}+$/",
+     *     message="Veuillez saisir un nom valide"
+     * )
      */
     private $name_users;
 
     /**
      * @ORM\Column(type="string", length=50)
+     *  @Assert\Regex(
+     *      pattern= "/^[A-Za-z ÁÀÂÄÃÅÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝÆÇáàâäãåéèêëíìîïñóòôöõúùûüýÿæç\'0-9,\.\-\_]{1,10}+$/",
+     *      message="Veuillez saisir un prénom valide"
+     * )
      */
     private $firstname_users;
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\Regex(
+     *     pattern= "/([0-9]{2}){4}[0-9]{2}/",
+     *     message="Veuillez saisir un numéro de téléphone valide"
+     * )
      */
     private $phone_number_users;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Regex(
+     *      pattern= "/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/",
+     *      message="Veuillez saisir un mail valide"
+     * )
      */
     private $mail;
+
+    /**
+      * @ORM\Column(type="string", length=50)
+      * @Assert\Regex(
+      *      pattern= "/^[A-Za-z ÁÀÂÄÃÅÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝÆÇáàâäãåéèêëíìîïñóòôöõúùûüýÿæç\'0-9,\.\-\_]{1,10}+$/",
+      *      message="Veuillez saisir un mot de passe valide"
+      * )
+     */
+    private $password_users;
 
     public function getId(): ?int
     {
@@ -95,4 +126,102 @@ class Users
 
         return $this;
     }
+
+    public function getPasswordUsers(): ?string
+    {
+        return $this->password_users;
+    }
+
+    public function setPasswordUsers(string $password_users): self
+    {
+        $this->password_users = $password_users;
+
+        return $this;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return ['ROLE_USER'];
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return ['ROLE_ADMIN'];
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+
+     public function serialize()
+     {
+         return serialize([
+             $this->id,
+             $this->mail,
+             $this->password_users
+         ]);
+     }
+
+     /**
+      * Constructs the object
+      * @link https://php.net/manual/en/serializable.unserialize.php
+      * @param string $serialized <p>
+      * The string representation of the object.
+      * </p>
+      * @return void
+      * @since 5.1.0
+      */
+     public function unserialize($serialized)
+     {
+        list (
+            $this->id,
+            $this->mail,
+            $this->password_users
+        ) = unserialize ($serialized, ['allowed_classes' => false]);
+     }
+
+     public function getUsername(): ?string
+     {
+         return $this->mail;
+     }
+
+     public function getPassword(): ?string
+     {
+         return $this->password_users;
+     }
 }
+
