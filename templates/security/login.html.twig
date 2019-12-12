@@ -6,7 +6,8 @@
 	<div class="container mt-4">
 		{% if error %}
 			<div class="alert alert-danger">
-				{{ error }}
+            <!-- affichage des messages d'erreur ainsi que leur traduction -->
+				{{ error.messagekey | trans(error.messagedata, 'security') }}
 			</div>
 		{% endif %}
 

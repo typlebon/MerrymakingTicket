@@ -13,7 +13,8 @@ security:
         main:
             anonymous: lazy
             logout:
-                path: app_logout
+                path: /logout
+                target: /
 
             # activate different ways to authenticate
 
@@ -35,6 +36,7 @@ security:
 
         #encoders permet de dire à symfony comment envoyer les mots de passe
     encoders:
-        App\Entity\Users: plaintext #mot de passe envoyé en clair
-        # Symfony\Component\Security\Core\User\User: plaintext
+        App\Entity\Users: 
+            algorithm: bcrypt
+            cost: 12
 
