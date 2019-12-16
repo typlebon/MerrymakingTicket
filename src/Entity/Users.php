@@ -16,6 +16,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Users implements UserInterface,\Serializable
 {
+    const ROLES = [
+        0 => 'ROLE_CUSTOMER',
+        1 => 'ROLE_SELLER',
+        2 => 'ROLE_MARKETING',
+        3 => 'ROLE_MODERATOR',
+        4 => 'ROLE_SUPER_ADMIN'
+    ];
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -60,13 +67,18 @@ class Users implements UserInterface,\Serializable
     private $mail;
 
     /**
-      * @ORM\Column(type="string", length=50)
+      * @ORM\Column(type="string", length=60)
       * @Assert\Regex(
       *      pattern= "/^[A-Za-z ÁÀÂÄÃÅÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝÆÇáàâäãåéèêëíìîïñóòôöõúùûüýÿæç\'0-9,\.\-\_]{1,10}+$/",
       *      message="Veuillez saisir un mot de passe valide"
       * )
      */
     private $password_users;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $role;
 
     public function getId(): ?int
     {
@@ -153,9 +165,29 @@ class Users implements UserInterface,\Serializable
      *
      * @return (Role|string)[] The user roles
      */
-    public function getRoles()
+    public function getRoles() : array
     {
-        return ['ROLE_ADMIN'];
+        $numero = $this->getRole();
+        
+        // 4
+        if ($numero == array_search('ROLE_SUPER_ADMIN', self::ROLES))
+        {
+            $tableau = array(
+                self::ROLES[0],
+                self::ROLES[1],
+                self::ROLES[2],
+                self::ROLES[3],
+                self::ROLES[4],
+            );
+            return $tableau;
+        }
+
+        // 0-3
+        else {
+            $mot = self::ROLES[$numero];            
+            return array($mot);   
+        }
+
     }
 
     /**
@@ -223,5 +255,18 @@ class Users implements UserInterface,\Serializable
      {
          return $this->password_users;
      }
+
+     public function getRole(): ?int
+     {
+         return $this->role;
+     }
+
+     public function setRole(int $role): self
+     {
+         $this->role = $role;
+
+         return $this;
+     }
+
 }
 

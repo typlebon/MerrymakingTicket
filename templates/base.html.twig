@@ -25,14 +25,29 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item">
-								<a class="nav-link" {% if current_menu is defined and current_menu == 'properties' %} active {% endif %} href="{{ path('users.index') }}">FICHE ARTISTE</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{{ path('admin.users.index')}}">ESPACE ADMIN</a>
+								<a class="nav-link" {% if current_menu is defined and current_menu == 'FicheArtiste' %} active {% endif %} href="{{ path('FicheArtiste.index') }}">FICHE ARTISTE</a>
 							</li>
 							{# <li class="nav-item">
-								<a class="nav-link" href="{{ path('admin.users.logout')}}">DECONNEXION</a>
-							</li> #}
+																						<a class="nav-link" href="{{ path('admin.users.event')}}">ESPACE ADMIN</a>
+																					</li> #}
+							<li class="nav-item">
+								<a class="nav-link" href="{{ path('admin.users.index')}}">CONNECTION</a>
+							</li>
+							<!-- Si utilisateur est connecté on applique la condition -->
+							{% if app.user %}
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ESPACE ADMIN</a>
+									<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+										<a class="dropdown-item" href="{{ path('event_index')}}">EVENEMENTS</a>
+										<a class="dropdown-item" href="{{ path('users.index')}}">USERS</a>
+									</div>
+								</li>
+								<ul class="navbar-nav">
+									<li class="nav-item">
+										<a href="{{ path('logout')}}" class="nav-link">DECONNEXION</a>
+									</li>
+								</ul>
+							{% endif %}
 						</ul>
 					</div>
 				</nav>
@@ -58,7 +73,7 @@
 							class="view">
 							<!--Video source-->
 							<video class="video-fluid" autoplay loop muted>
-								<source src="" type="video/mp4"/>
+								<source src="{{ asset('assets/img/concert.png') }}" type="video/mp4"/>
 							</video>
 							<div class="mask rgba-indigo-light"></div>
 						</div>
@@ -121,3 +136,4 @@
 			<script src="../assets/js/effet.js"></script>
 		</body>
 	</html>
+</body></html>

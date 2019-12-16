@@ -26,9 +26,13 @@ class UsersController extends AbstractController
      */
     public function index(): Response
     {
+        $users = $this->repository->findAll();
         return $this->render(
-            'users/users.html.twig',
-            ['current_menu' => 'users']
+            'users/index.html.twig',
+            [
+                'current_menu' => 'users',
+                'users' => $users
+            ]
         );
     }
 
@@ -40,8 +44,8 @@ class UsersController extends AbstractController
     //noms doivent correspondre à la route
     public function show(Users $users, string $slug): Response
     {
-        if($users->getSlug() !== $slug){
-            $this->redirectToRoute('users.show', [
+        if ($users->getSlug() !== $slug) {
+            $this->redirectToRoute('users/users.show', [
                 'id' => $users->getId(),
                 'slug' => $users->getSlug()
             ], 301); // code 301 : redirection permanente 

@@ -4,3 +4,11 @@
 
 logout:
     path: /logout
+
+# controllers:
+#     resource: '../src/Controller/'
+#     type:     annotation
+
+# waza:
+#     path: /waza
+#     controller: App\Controller\FicheArtisteController::index

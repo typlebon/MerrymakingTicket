@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Evenement' %}
+
+{% block body %}
+	<div class="container">
+		<h1>
+			Nos événements
+
+			<div class="row flex">
+				{% for FicheArtiste in FichesArtiste %}
+					<div class="col-3">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">
+									<p class="card-text">{{ FicheArtiste.name_artiste }}</p>
+									<div class="text-primary">{{ FicheArtiste.description_artiste }}</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</h1>
+			</div>
+		{% endblock %}

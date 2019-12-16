@@ -31,7 +31,7 @@ class FicheArtiste
         return $this->id;
     }
 
-    public function getNameArtiste(): ?string
+    public function getname_artiste(): ?string
     {
         return $this->name_artiste;
     }
@@ -43,7 +43,7 @@ class FicheArtiste
         return $this;
     }
 
-    public function getDescriptionArtiste(): ?string
+    public function getdescription_artiste(): ?string
     {
         return $this->description_artiste;
     }
