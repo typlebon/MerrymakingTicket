@@ -35,7 +35,7 @@ class AdminUsersController extends AbstractController
     public function index()
     {
         $users = $this->repository->findAll();
-        return $this->render('index.html.twig', compact('users'));
+        return $this->render('users/index.html.twig', compact('users'));
     }
     /**
      * @Route ("/admin/users/create", name="admin.users.new")

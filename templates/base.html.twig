@@ -27,11 +27,8 @@
 							<li class="nav-item">
 								<a class="nav-link" {% if current_menu is defined and current_menu == 'FicheArtiste' %} active {% endif %} href="{{ path('FicheArtiste.index') }}">FICHE ARTISTE</a>
 							</li>
-							{# <li class="nav-item">
-																						<a class="nav-link" href="{{ path('admin.users.event')}}">ESPACE ADMIN</a>
-																					</li> #}
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path('admin.users.index')}}">CONNECTION</a>
+								<a class="nav-link" href="{{ path('users.index')}}">CONNECTION</a>
 							</li>
 							<!-- Si utilisateur est connecté on applique la condition -->
 							{% if app.user %}

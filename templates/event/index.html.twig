@@ -1,49 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event index{% endblock %}
+{% block title 'Gérer les évenement' %}
 
 {% block body %}
-    <h1>Event index</h1>
+	<div class="container mt-4">
+		<h1>Gérer les évenements</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name_event</th>
-                <th>Short_description_event</th>
-                <th>Long_description_event</th>
-                <th>Ref_provider_event</th>
-                <th>Purchase_price_event</th>
-                <th>Start_date_event</th>
-                <th>End_date_event</th>
-                <th>Festival_place_event</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for event in events %}
-            <tr>
-                <td>{{ event.id }}</td>
-                <td>{{ event.nameEvent }}</td>
-                <td>{{ event.shortDescriptionEvent }}</td>
-                <td>{{ event.longDescriptionEvent }}</td>
-                <td>{{ event.refProviderEvent }}</td>
-                <td>{{ event.purchasePriceEvent }}</td>
-                <td>{{ event.startDateEvent ? event.startDateEvent|date('Y-m-d') : '' }}</td>
-                <td>{{ event.endDateEvent ? event.endDateEvent|date('Y-m-d') : '' }}</td>
-                <td>{{ event.festivalPlaceEvent }}</td>
-                <td>
-                    <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
-                    <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+		<!-- condition pour afficher message addFlash -->
+		{% for message in app.flashes('success')%}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<table class="table table-stripped">
+			<thead>
+				<tr>
+					<th>NOM</th>
+					<th>Description courte</th>
+					<th>Description longue</th>
+					<th>Reférence fournisseur</th>
+					<th>Prix</th>
+					<th>Date de lancement</th>
+					<th>Date de fin</th>
+					<th>Nombre de places</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for event in events %}
+					<tr>
+						<td>{{ event.nameEvent }}</td>
+						<td>{{ event.shortDescriptionEvent }}</td>
+						<td>{{ event.longDescriptionEvent }}</td>
+						<td>{{ event.refProviderEvent }}</td>
+						<td>{{ event.purchasePriceEvent }}</td>
+						<td>{{ event.startDateEvent ? event.startDateEvent|date('Y-m-d') : '' }}</td>
+						<td>{{ event.endDateEvent ? event.endDateEvent|date('Y-m-d') : '' }}</td>
+						<td>{{ event.festivalPlaceEvent }}</td>
+						<td>
+							<a href="{{ path('event_show', {'id': event.id}) }}" class="btn btn-pink">VOIR</a>
+							<a href="{{ path('event_edit', {'id': event.id}) }}" class="btn btn-unique">MODIFIER</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="10">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-    <a href="{{ path('event_new') }}">Create new</a>
-{% endblock %}
+
+		<div class="text-right">
+			<a href="{{ path('event_new')}}" class="btn btn-primary">
+				Créer un nouvel évenement</a>
+		</div>
+	{% endblock %}
