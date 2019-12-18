@@ -38,7 +38,8 @@ class FicheArtisteController extends AbstractController
         $fichesArtiste = $this->repository->findAllVisible();
         //retourne la vue twig
         return $this->render(
-            'FicheArtiste.html.twig', [
+            'FicheArtiste.html.twig', 
+            [
                 'current_menu' => 'FicheArtiste',
                 'FichesArtiste' => $fichesArtiste 
             ]

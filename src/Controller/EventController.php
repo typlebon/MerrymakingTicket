@@ -15,6 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class EventController extends AbstractController
 {
+
+    public function __construct(EventRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @Route("/", name="event_index", methods={"GET"})
      */
@@ -25,8 +31,9 @@ class EventController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/new", name="event_new", methods={"GET","POST"})
+     * @Route("/admin/new", name="event_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -53,13 +60,20 @@ class EventController extends AbstractController
      */
     public function show(Event $event): Response
     {
-        return $this->render('event/show.html.twig', [
-            'event' => $event,
-        ]);
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_SELLER')){
+            return $this->render('event/show_admin.html.twig', [
+                'event' => $event,
+            ]);
+        }
+        else {
+            return $this->render('event/show_customer.html.twig', [
+                'event' => $event,
+            ]);
+        }
     }
 
     /**
-     * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
+     * @Route("/admin/{id}/edit", name="event_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Event $event): Response
     {
@@ -79,11 +93,11 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="event_delete", methods={"DELETE"})
+     * @Route("/admin/{id}", name="event_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Event $event): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($event);
             $entityManager->flush();
