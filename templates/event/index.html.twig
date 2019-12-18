@@ -19,7 +19,7 @@
 					<th>Description courte</th>
 					<th>Description longue</th>
 					{% if is_granted('ROLE_SELLER') %}
-					<th>Reférence fournisseur</th>
+						<th>Reférence fournisseur</th>
 					{% endif %}
 					<th>Prix</th>
 					<th>Date de lancement</th>
@@ -34,7 +34,7 @@
 						<td>{{ event.shortDescriptionEvent }}</td>
 						<td>{{ event.longDescriptionEvent }}</td>
 						{% if is_granted('ROLE_SELLER') %}
-						<td>{{ event.refProviderEvent }}</td>
+							<td>{{ event.refProviderEvent }}</td>
 						{% endif %}
 						<td>{{ event.purchasePriceEvent }}</td>
 						<td>{{ event.startDateEvent ? event.startDateEvent|date('Y-m-d') : '' }}</td>
@@ -45,6 +45,8 @@
 							{% if is_granted('ROLE_SELLER') %}
 								<a href="{{ path('event_edit', {'id': event.id}) }}" class="btn btn-unique">MODIFIER</a>
 							{% endif %}
+								<a href="" {{ path('cart_add', {'id':event.id} ) }}"" class="btn btn-primary">
+									Ajouter au panier</a>
 						</td>
 					</tr>
 				{% else %}
@@ -56,13 +58,9 @@
 		</table>
 
 		{% if is_granted('ROLE_SELLER') %}
-		<div class="text-right">
-			<a href="{{ path('event_new')}}" class="btn btn-primary">
-				Créer un nouvel évenement</a>
-		</div>
+			<div class="text-right">
+				<a href="{{ path('event_new')}}" class="btn btn-primary">
+					Créer un nouvel évenement</a>
+			</div>
 		{% endif %}
-		{# <div class="text-right">
-			<a href=""{{ path('cart_add', {'id':event.id}) }}"" class="btn btn-primary">
-				Ajouter au panier</a>
-		</div> #}
 	{% endblock %}
