@@ -2,23 +2,101 @@
 
 {% block title 'Voir tout nos produits' %}
 
-{% block body %}
-	<div class="container">
-		<h1>
-			Nos artistes
 
-			<div class="row flex">
-				{% for FicheArtiste in FichesArtiste %}
-					<div class="col-3">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">
-									<p class="card-text">{{ FicheArtiste.name_artiste }}</p>
-									<div class="text-primary">{{ FicheArtiste.description_artiste }}</div>
-								</div>
+{% block body %}
+		<!-- Carousel Wrapper-->
+			<div
+				id="video-carousel-example2" class="carousel slide carousel-fade" data-ride="carousel">
+				<!--Indicators-->
+				<ol class="carousel-indicators">
+					<li data-target="#video-carousel-example2" data-slide-to="0" class="active"></li>
+					<li data-target="#video-carousel-example2" data-slide-to="1"></li>
+				</ol>
+				<!--/.Indicators-->
+				<!--Slides-->
+				<div
+					class="carousel-inner" role="listbox">
+					<!-- First slide -->
+					<div
+						class="carousel-item active">
+						<!--Mask color-->
+						<div
+							class="view">
+							<!--Video source-->
+							<video class="video-fluid" autoplay loop muted>
+								<source src="{{ asset('assets/video/Lollapalooza2.mp4') }}" type="video/mp4"/>
+							</video>
+							<div class="mask rgba-indigo-light"></div>
+						</div>
+
+						<!--Caption-->
+						<div class="carousel-caption">
+							<div class="animated fadeInDown">
+								<h3 class="h3-responsive">#Lollapalooza</h3>
 							</div>
 						</div>
-					{% endfor %}
-				</h1>
+						<!--Caption-->
+					</div>
+					<!-- /.First slide -->
+
+					<!-- Second slide -->
+					<div
+						class="carousel-item">
+						<!--Mask color-->
+						<div
+							class="view">
+							<!--Video source-->
+							<video class="video-fluid" autoplay loop muted>
+								<source src="{{ asset('assets/video/burning.mp4') }}" type="video/mp4"/>
+							</video>
+							<div class="mask rgba-purple-slight"></div>
+						</div>
+
+						<!--Caption-->
+						<div class="carousel-caption">
+							<div class="animated fadeInDown">
+								<h3 class="h3-responsive">#BurningMan</h3>
+							</div>
+						</div>
+						<!--Caption-->
+					</div>
+					<!-- /.Second slide -->
+					<!--Controls-->
+					<a class="carousel-control-prev fixed" href="#" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next fixed" href="#" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+					<!--/.Controls-->
+				</div>
 			</div>
-		{% endblock %}
+	<div class="bgimg-2">
+  <div class="caption">
+  <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">CONCERTS</span>
+  </div>
+</div>
+<div style="position:relative;">
+  <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+    <p>MerrymakingTickets, une société fraçaise, a repensé le processus d'achat et de vente de billets en 2019 et n'a cessé de se démarquer depuis par ses innovations. Plus de 100 d'événements, de concerts dans plus 5 pays. Toutes les 2 secondes, une personne achète un billet sur MerrymakingTickets.</p>  
+    </div>
+    <div class="col-sm">
+    <i class="fas fa-certificate"></i>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="bgimg-3">
+  <div class="caption">
+  <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">FESTIVALS</span>
+  </div>
+</div>
+
+{% endblock %}

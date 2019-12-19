@@ -1,0 +1,126 @@
+video {
+    width: 100%;
+    height: 100%;
+}
+
+
+.navbar {
+    background-color: transparent;
+}
+
+.bgimg-1,
+.bgimg-2,
+.bgimg-3 {
+    position: relative;
+    opacity: 0.65;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.bgimg-2 {
+    background-image: url("festival1.jpg");
+    min-height: 400px;
+}
+
+.bgimg-3 {
+    background-image: url("festival3.jpg");
+    min-height: 400px;
+}
+
+/* text "concert" et festival" */
+.caption {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+}
+
+/* contour de "concert" et "festival" */
+.caption span.border {
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+}
+
+h3 {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font: 20px "Lato", sans-serif;
+    color: rgb(252, 244, 244);
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+
+    .bgimg-1,
+    .bgimg-2,
+    .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+
+.test {
+    overflow: hidden;
+    /*On empeche l'image de dépasser du bloc*/
+    display: block;
+    width: 300px;
+    /*Notre bloc fera 300px de large*/
+    margin: auto;
+    /* on centre le bloc*/
+}
+
+#img {
+    transition: 1s;
+}
+
+/* durée de l'animation en secondes*/
+#img:hover {
+    transform: scale(1.2);
+}
+
+/* Zoom de l'image. La taille normale est 1 */
+
+
+#img3 {
+    width: 20rem;
+    /*permet de mettre l'image en carrée */
+    height: 20rem;
+    -moz-border-radius: 2rem;
+    /* mettre des bords arrondis sur l'image */
+    -webkit-border-radius: 2rem;
+    border-radius: 2rem;
+}
+
+table {
+    /* border-radius: 5px;
+    width: 50%; */
+    margin: 0px auto;
+    float: none;
+    width: 100%;
+    max-width: 900px;
+    min-width: 600px;
+    text-align: center;
+    font-family: Arial Narrow, sans-serif;
+    font: 200rem;
+}
+
+#img1 {
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    /* letter-spacing: 5px; */
+    /* uppercase : majuscule */
+    /* text-transform: uppercase; */
+    /* font: 30px 1"Lato", sans-serif; */
+    color: rgb(20, 19, 19);
+    font-size: 35px;
+    line-height: 70px;
+}

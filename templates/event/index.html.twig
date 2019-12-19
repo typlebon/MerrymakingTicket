@@ -45,7 +45,7 @@
 							{% if is_granted('ROLE_SELLER') %}
 								<a href="{{ path('event_edit', {'id': event.id}) }}" class="btn btn-unique">MODIFIER</a>
 							{% endif %}
-								<a href="" {{ path('cart_add', {'id':event.id} ) }}"" class="btn btn-primary">
+								<a href="{{ path('cart_add', {'id':event.id} ) }}" class="btn btn-primary">
 									Ajouter au panier</a>
 						</td>
 					</tr>
