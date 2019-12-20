@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +17,8 @@ class UsersType extends AbstractType
             ->add('firstname_users')
             ->add('phone_number_users')
             ->add('mail')
-            ->add('password_users')
+            ->add('password_users', PasswordType::class)
+            ->add('retype_password_users', PasswordType::class)
             ->add('role')
 
         ;

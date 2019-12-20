@@ -49,11 +49,12 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($users);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('users.index');
+            if ($users->getPasswordUsers() == $users->getRetypePasswordUsers()){
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($users);
+                $entityManager->flush();
+                return $this->redirectToRoute('users.index');
+            }
         }
 
         return $this->render('users/new.html.twig', [

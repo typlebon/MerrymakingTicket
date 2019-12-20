@@ -34,11 +34,14 @@
 				<tr>
 					<td>{{ item.event.nameEvent }}</td>
 					<td>{{ item.event.purchasePriceEvent }}</td>
-					<td>{{ item.quantity }}</td>
+					<td>
+					<a href="{{ path('cart_decrement', {'id': item.event.id}) }}">-</a>
+					{{ item.quantity }}
+					<a href="{{ path('cart_add', {'id': item.event.id}) }}">+</a>
+					</td>
 					<td>{{ item.event.purchasePriceEvent * item.quantity }}</td>
 					<td>
 						<a href="{{ path('cart_remove', {'id': item.event.id}) }}" class="fas fa-trash"></a>
-						{# <i class="fas fa-trash"></i> #}
 						<!-- petite poubelle -->
 						</a>
 					</td>

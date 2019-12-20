@@ -80,6 +80,9 @@ class Users implements UserInterface,\Serializable
      */
     private $role;
 
+    
+    private $retype_password_users;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -147,6 +150,18 @@ class Users implements UserInterface,\Serializable
     public function setPasswordUsers(string $password_users): self
     {
         $this->password_users = $password_users;
+
+        return $this;
+    }
+
+    public function getRetypePasswordUsers(): ?string
+    {
+        return $this->retype_password_users;
+    }
+
+    public function setRetypePasswordUsers(string $retype_password_users): self
+    {
+        $this->retype_password_users = $retype_password_users;
 
         return $this;
     }

@@ -30,11 +30,21 @@ class HomeController extends AbstractController
      * @return Response
      */
 
-    public function toto(FicheArtisteRepository $repository): Response
+    public function ficheArtiste(FicheArtisteRepository $repository): Response
     {
         $FicheArtiste = $repository->findLatest();
         return $this->render('FicheArtiste', [
             'FicheArtiste' => $FicheArtiste
+        ]);
+    }
+
+    /**
+     * @Route("/accueil", name="accueil_page")
+     */
+    public function toto()
+    {
+        return $this->render('accueil/index.html.twig', [
+            'accueil' => 'TestAccueil',
         ]);
     }
 }

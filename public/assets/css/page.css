@@ -124,3 +124,8 @@ h1 {
     font-size: 35px;
     line-height: 70px;
 }
+
+#image_dj {
+    width: 25rem;
+    height: 20rem;
+}

@@ -19,20 +19,17 @@
 		<body>
 			<header>
 				<nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar">
-					<a class="navbar-brand" href="{{ path('FicheArtiste.index')}}">
+					<a class="navbar-brand" href="{{ path('accueil_page')}}">
 						<strong>MerrymakingTickets.com</strong>
 					</a>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul
 							class="navbar-nav mr-auto">
 							{# <li class="nav-item">
-															<a class="nav-link" {% if current_menu is defined and current_menu == 'FicheArtiste' %} active {% endif %} href="{{ path('FicheArtiste.index') }}">FICHE ARTISTE</a>
-														</li> #}
+																						<a class="nav-link" {% if current_menu is defined and current_menu == 'FicheArtiste' %} active {% endif %} href="{{ path('FicheArtiste.index') }}">FICHE ARTISTE</a>
+																					</li> #}
 							<li class="nav-item">
 								<a class="nav-link" {% if current_menu is defined and current_menu == 'event' %} active {% endif %} href="{{ path('event_index')}}">EVENEMENTS</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{{ path('admin.users.index')}}">CONNECTION</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{ path('cart_panier')}}">PANIER</a>
@@ -51,6 +48,10 @@
 										<a href="{{ path('logout')}}" class="nav-link">DECONNEXION</a>
 									</li>
 								</ul>
+							{% else %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{ path('admin.users.index')}}">CONNEXION</a>
+								</li>
 							{% endif %}
 						</ul>
 					</div>
