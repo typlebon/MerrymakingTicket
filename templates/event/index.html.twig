@@ -3,64 +3,61 @@
 {% block title 'Gérer les évenement' %}
 
 {% block body %}
+	<hr class="featurette-divider">
+	<hr class="featurette-divider">
+	{% for message in app.flashes('success')%}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% if is_granted('ROLE_SELLER') %}
+		<div class="text-right">
+			<a href="{{ path('event_new')}}" class="btn btn-primary">
+				Créer un nouvel évenement</a>
+		</div>
+	{% endif %}
 	<div class="container mt-4">
 		<h1>Gérer les évenements</h1>
+		{% for event in events %}
 
-		<!-- condition pour afficher message addFlash -->
-		{% for message in app.flashes('success')%}
-			<div class="alert alert-success">
-				{{ message }}
+			<!-- Page Content -->
+			<div class="container">
+				<div
+					class="row">
+					<!-- Team Member 1 -->
+					<div class="col-xl-3 col-md-6 mb-4">
+						<div class="card border-0 shadow">
+							<img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+							<div class="card-body text-center">
+								<h5 class="card-title mb-0">{{ event.nameEvent }}</h5>
+								<div class="card-text text-black-50">{{ event.shortDescriptionEvent }}</div>
+								<div class="card-text text-black-50">{{ event.longDescriptionEvent }}</div>
+								{% if is_granted('ROLE_SELLER') %}
+									<div class="card-text text-black-50">{{ event.refProviderEvent }}</div>
+								{% endif %}
+								<div class="card-text text-black-50">{{ event.purchasePriceEvent }}</div>
+
+								<div class="btn-group" role="group" aria-label="Basic example">
+									<button type="button" class="btn btn-pink btn-rounded">
+										<a href="{{ path('event_show', {'id': event.id}) }}" class="text-muted">VOIR</a>
+									</button>
+									{% if is_granted('ROLE_SELLER') %}
+										<button type="button" class="btn btn-pink btn-rounded">
+											<a href="{{ path('event_edit', {'id': event.id}) }}" class="text-muted">MODIFIER</a>
+										</button>
+									{% endif %}
+									<button type="button" class="btn btn-pink btn-rounded">
+										<a href="{{ path('cart_add', {'id':event.id} ) }}" class="text-muted">Ajouter au panier</a>
+									</button>
+								</div>
+
+						</div>
+					</div>
+				</div>
+				
+				<!-- /.row -->
 			</div>
+			<!-- /.container -->
 		{% endfor %}
-		<table class="table table-stripped">
-			<thead>
-				<tr>
-					<th>NOM</th>
-					<th>Description courte</th>
-					<th>Description longue</th>
-					{% if is_granted('ROLE_SELLER') %}
-						<th>Reférence fournisseur</th>
-					{% endif %}
-					<th>Prix</th>
-					<th>Date de lancement</th>
-					<th>Date de fin</th>
-					<th>Nombre de places</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for event in events %}
-					<tr>
-						<td>{{ event.nameEvent }}</td>
-						<td>{{ event.shortDescriptionEvent }}</td>
-						<td>{{ event.longDescriptionEvent }}</td>
-						{% if is_granted('ROLE_SELLER') %}
-							<td>{{ event.refProviderEvent }}</td>
-						{% endif %}
-						<td>{{ event.purchasePriceEvent }}</td>
-						<td>{{ event.startDateEvent ? event.startDateEvent|date('Y-m-d') : '' }}</td>
-						<td>{{ event.endDateEvent ? event.endDateEvent|date('Y-m-d') : '' }}</td>
-						<td>{{ event.festivalPlaceEvent }}</td>
-						<td>
-							<a href="{{ path('event_show', {'id': event.id}) }}" class="btn btn-pink">VOIR</a>
-							{% if is_granted('ROLE_SELLER') %}
-								<a href="{{ path('event_edit', {'id': event.id}) }}" class="btn btn-unique">MODIFIER</a>
-							{% endif %}
-								<a href="{{ path('cart_add', {'id':event.id} ) }}" class="btn btn-primary">
-									Ajouter au panier</a>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="10">no records found</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-
-		{% if is_granted('ROLE_SELLER') %}
-			<div class="text-right">
-				<a href="{{ path('event_new')}}" class="btn btn-primary">
-					Créer un nouvel évenement</a>
-			</div>
-		{% endif %}
-	{% endblock %}
+	</tbody>
+</table>{% endblock %}
