@@ -16,6 +16,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
 		<link href="{{ asset('assets/css/page.css') }}" rel="stylesheet" type="text/css"/> {% block stylesheets %}{% endblock %}
 		</head>
+		
 		<body>
 			<header>
 				<nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar">
@@ -57,17 +58,5 @@
 					</div>
 				</nav>
 			</header>
-			{% block body %}{% endblock %}
-			{% block javascripts %}{% endblock %}
-			<!-- JQuery -->
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-			<!-- Bootstrap tooltips -->
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-			<!-- Bootstrap core JavaScript -->
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-			<!-- MDB core JavaScript -->
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
-			<script src="assets/js/effet.js"></script>
-		</body>
-	</html>
-</body></html>
+			{% block body %}
+			{% endblock %}

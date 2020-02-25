@@ -129,3 +129,11 @@ h1 {
     width: 25rem;
     height: 20rem;
 }
+
+#evenement {
+    margin-top: 60px;
+}
+
+#voir {
+    font: 10px "Lato", sans-serif
+}

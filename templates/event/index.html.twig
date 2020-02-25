@@ -3,29 +3,27 @@
 {% block title 'Gérer les évenement' %}
 
 {% block body %}
-	<hr class="featurette-divider">
-	<hr class="featurette-divider">
+			<div class="container">
 	{% for message in app.flashes('success')%}
 		<div class="alert alert-success">
 			{{ message }}
 		</div>
 	{% endfor %}
+	<div class="container-fluid mt-4">
+		<h1 id="evenement"> Gérer les évenements</h1>
 	{% if is_granted('ROLE_SELLER') %}
 		<div class="text-right">
 			<a href="{{ path('event_new')}}" class="btn btn-primary">
 				Créer un nouvel évenement</a>
 		</div>
 	{% endif %}
-	<div class="container mt-4">
-		<h1>Gérer les évenements</h1>
-		{% for event in events %}
 
 			<!-- Page Content -->
-			<div class="container">
-				<div
-					class="row">
+				<div class="row">
+				<div class="card-columns">
+		{% for event in events %}
 					<!-- Team Member 1 -->
-					<div class="col-xl-3 col-md-6 mb-4">
+					<div class="col">
 						<div class="card border-0 shadow">
 							<img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
 							<div class="card-body text-center">
@@ -38,26 +36,27 @@
 								<div class="card-text text-black-50">{{ event.purchasePriceEvent }}</div>
 
 								<div class="btn-group" role="group" aria-label="Basic example">
-									<button type="button" class="btn btn-pink btn-rounded">
-										<a href="{{ path('event_show', {'id': event.id}) }}" class="text-muted">VOIR</a>
+									<button type="button" class="btn pink lighten-5 btn-rounded">
+										<a id="voir" href="{{ path('event_show', {'id': event.id}) }}" class="text-muted">Voir</a>
 									</button>
 									{% if is_granted('ROLE_SELLER') %}
-										<button type="button" class="btn btn-pink btn-rounded">
+										<button type="button" class="btn pink lighten-5 btn-rounded">
 											<a href="{{ path('event_edit', {'id': event.id}) }}" class="text-muted">MODIFIER</a>
 										</button>
 									{% endif %}
-									<button type="button" class="btn btn-pink btn-rounded">
+									<button type="button" class="btn pink lighten-5 btn-rounded">
 										<a href="{{ path('cart_add', {'id':event.id} ) }}" class="text-muted">Ajouter au panier</a>
 									</button>
 								</div>
-
 						</div>
 					</div>
 				</div>
-				
+		{% endfor %}
+				</div>
 				<!-- /.row -->
 			</div>
 			<!-- /.container -->
-		{% endfor %}
 	</tbody>
-</table>{% endblock %}
+	</table>
+{% include 'footer.html.twig' %}
+{% endblock %}
