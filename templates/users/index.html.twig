@@ -4,7 +4,7 @@
 
 {% block body %}
 	<div class="container mt-4">
-		<h1>Gérer les utilisateurs</h1>
+		<h1 id="hautPage">Gérer les utilisateurs</h1>
 
 		<!-- condition pour afficher message addFlash -->
 		{% for message in app.flashes('success')%}
@@ -49,4 +49,3 @@
 		</div>
 
 	{% endblock %}
-	{% extends 'footer.html.twig' %}
