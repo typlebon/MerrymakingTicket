@@ -5,19 +5,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends AbstractController {
-
+class SecurityController extends AbstractController
+{
     /**
      * @Route ("/login", name="login")
      */
 
-     //authenticationUtils = class pour l'authentifaction
-    public function login(AuthenticationUtils $authenticationUtils){
-        //afficher les erreurs 
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+        //authenticationUtils = class pour l'authentifaction
+        //afficher les erreurs
         $error = $authenticationUtils->getLastAuthenticationError();
-        //dernier mail rentré par utilisateur 
+        //dernier mail rentré par utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('security/login.html.twig',[
+        return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error
         ]);
@@ -26,7 +27,10 @@ class SecurityController extends AbstractController {
     /**
      * @Route("/logout", name="app_logout", methods={"GET"})
      */
-    public function logout(){
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+    public function logout()
+    {
+        throw new \Exception(
+            'Don\'t forget to activate logout in security.yaml'
+        );
     }
 }

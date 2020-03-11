@@ -68,10 +68,7 @@ class Users implements UserInterface,\Serializable
 
     /**
       * @ORM\Column(type="string", length=60)
-      * @Assert\Regex(
-      *      pattern= "/^[A-Za-z ÁÀÂÄÃÅÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝÆÇáàâäãåéèêëíìîïñóòôöõúùûüýÿæç\'0-9,\.\-\_]{1,10}+$/",
-      *      message="Veuillez saisir un mot de passe valide"
-      * )
+      * 
      */
     private $password_users;
 

@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-
 // use App\Controller\Admin\AdminUsersController;
 use App\Entity\Users;
 use App\Form\UsersType;
@@ -22,8 +21,10 @@ class AdminUsersController extends AbstractController
      */
     private $repository;
 
-    public function __construct(UsersRepository $repository, EntityManagerInterface $em)
-    {
+    public function __construct(
+        UsersRepository $repository,
+        EntityManagerInterface $em
+    ) {
         $this->repository = $repository;
         $this->em = $em;
     }
@@ -94,10 +95,15 @@ class AdminUsersController extends AbstractController
     //Supression d'un utilisateur
     public function delete(Users $users, Request $request)
     {
-        if ($this->isCsrfTokenValid('delete' . $users->getId(), $request->get('_token'))) {
+        if (
+            $this->isCsrfTokenValid(
+                'delete' . $users->getId(),
+                $request->get('_token')
+            )
+        ) {
             $this->em->remove($users);
             $this->em->flush();
-            //message de confirmation de modification 
+            //message de confirmation de modification
             $this->addFlash('success', 'Suppression enregistré');
         }
         return $this->redirectToRoute('admin.users.index');

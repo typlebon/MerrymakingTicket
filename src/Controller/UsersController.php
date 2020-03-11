@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UsersController extends AbstractController
 {
@@ -16,7 +17,6 @@ class UsersController extends AbstractController
      * @var UsersRepository
      */
     private $repository;
-
 
     public function __construct(UsersRepository $repository)
     {
@@ -30,13 +30,10 @@ class UsersController extends AbstractController
     public function index(): Response
     {
         $users = $this->repository->findAll();
-        return $this->render(
-            'users/index.html.twig',
-            [
-                'current_menu' => 'users',
-                'users' => $users
-            ]
-        );
+        return $this->render('users/index.html.twig', [
+            'current_menu' => 'users',
+            'users' => $users
+        ]);
     }
 
     /**
@@ -49,7 +46,9 @@ class UsersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($users->getPasswordUsers() == $users->getRetypePasswordUsers()){
+            if (
+                $users->getPasswordUsers() == $users->getRetypePasswordUsers()
+            ) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($users);
                 $entityManager->flush();
@@ -59,27 +58,39 @@ class UsersController extends AbstractController
 
         return $this->render('users/new.html.twig', [
             'users' => $users,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Users $users): Response
-    {
+    public function edit(
+        Request $request,
+        Users $users,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response {
         $form = $this->createForm(UsersType::class, $users);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            // code pour le mot de passe
+            $users->setPasswordUsers(
+                $passwordEncoder->encodePassword(
+                    $users,
+                    $form->get('password_users')->getData()
+                )
+            );
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
 
             return $this->redirectToRoute('users.index');
         }
 
         return $this->render('users/edit.html.twig', [
             'users' => $users,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -92,10 +103,14 @@ class UsersController extends AbstractController
     public function show(Users $users, string $slug): Response
     {
         if ($users->getSlug() !== $slug) {
-            $this->redirectToRoute('users/users.show', [
-                'id' => $users->getId(),
-                'slug' => $users->getSlug()
-            ], 301); // code 301 : redirection permanente 
+            $this->redirectToRoute(
+                'users/users.show',
+                [
+                    'id' => $users->getId(),
+                    'slug' => $users->getSlug()
+                ],
+                301
+            ); // code 301 : redirection permanente
         }
         return $this->render('users/show.html.twig', [
             'users' => $users,
@@ -103,17 +118,22 @@ class UsersController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Users $users): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$users->getId(), $request->request->get('_token'))) {
+        if (
+            $this->isCsrfTokenValid(
+                'delete' . $users->getId(),
+                $request->request->get('_token')
+            )
+        ) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($users);
             $entityManager->flush();
             return $this->redirectToRoute('event_index');
-        } 
+        }
 
         return $this->redirectToRoute('users.index');
     }

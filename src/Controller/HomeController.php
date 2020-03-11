@@ -16,10 +16,13 @@ class HomeController extends AbstractController
      * @return Response
      */
 
-    public function index(UsersRepository $repository): Response // specification à php du retour d'un objet response
+    public function index(UsersRepository $repository): Response
     {
+        // specification à php du retour d'un objet response
+        // specification à php du retour d'un objet response
         $users = $repository->findLatest();
-        return $this->render('pages/home.html.twig', [ // appel de la vue se situant dans templates/page/ 
+        return $this->render('pages/home.html.twig', [
+            // appel de la vue se situant dans templates/page/
             'users' => $users
         ]);
     }
@@ -44,7 +47,7 @@ class HomeController extends AbstractController
     public function toto()
     {
         return $this->render('accueil/index.html.twig', [
-            'accueil' => 'TestAccueil',
+            'accueil' => 'TestAccueil'
         ]);
     }
 }

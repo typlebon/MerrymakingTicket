@@ -19,14 +19,13 @@ class EventType extends AbstractType
             ->add('purchase_price_event')
             ->add('start_date_event')
             ->add('end_date_event')
-            ->add('festival_place_event')
-        ;
+            ->add('festival_place_event');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Event::class,
+            'data_class' => Event::class
         ]);
     }
 }
