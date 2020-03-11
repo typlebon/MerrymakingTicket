@@ -131,9 +131,34 @@ h1 {
 }
 
 #hautPage {
+    /* ombre du texte */
+    text-shadow: 2px 2px 0 white,
+    4px 4px 0 #cbb8b4;
     margin-top: 70px;
+    font: bold 3em Impact, Fantasy;
+    text-align: center;
+    color :	#424141;
+    letter-spacing: 2px
+
 }
 
 /* #voir {
     font: 10px "Lato", sans-serif
 } */
+
+#panier {
+    width: 100%;
+    height: 100%;
+}
+
+#nomConcert {
+        padding-top: 70px;
+        writing-mode: vertical-rl;
+        position: absolute;
+        left: 0;
+        top: 0;
+        line-height: 1;
+        color:#eed5b4;
+        font-size: 80px;
+        font-weight: 800;
+}

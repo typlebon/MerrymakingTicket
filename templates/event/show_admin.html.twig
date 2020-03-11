@@ -3,52 +3,50 @@
 {% block title %}Event{% endblock %}
 
 {% block body %}
-    <h1>Event</h1>
+    <h1 id="hautPage">Evénement</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Name_event</th>
+                <th>Nom</th>
                 <td>{{ event.nameEvent }}</td>
             </tr>
             <tr>
-                <th>Short_description_event</th>
+                <th>Description courte</th>
                 <td>{{ event.shortDescriptionEvent }}</td>
             </tr>
             <tr>
-                <th>Long_description_event</th>
+                <th>Description longue</th>
                 <td>{{ event.longDescriptionEvent }}</td>
             </tr>
             <tr>
-                <th>Ref_provider_event</th>
+                <th>Référence fournisseur</th>
                 <td>{{ event.refProviderEvent }}</td>
             </tr>
             <tr>
-                <th>Purchase_price_event</th>
+                <th>Prix</th>
                 <td>{{ event.purchasePriceEvent }}</td>
             </tr>
             <tr>
-                <th>Start_date_event</th>
+                <th>Début évenement</th>
                 <td>{{ event.startDateEvent ? event.startDateEvent|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>End_date_event</th>
+                <th>Début évenement</th>
                 <td>{{ event.endDateEvent ? event.endDateEvent|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Festival_place_event</th>
+                <th>Nombre de place</th>
                 <td>{{ event.festivalPlaceEvent }}</td>
             </tr>
+
         </tbody>
+    <button type="button" class="btn btn-pink btn-rounded">
+    <a href="{{ path('event_index') }}" class="text-muted">Retour</a>
+    </button>
+    <button type="button" class="btn btn-pink btn-roundedt">
+    <a href="{{ path('event_edit', {'id': event.id})}}" class="text-muted">Modifier</a>
+    </button>
     </table>
-
-    <a class="btn btn-info" href="{{ path('event_index') }}">Retour</a>
-
-    <a class="btn btn-info" href="{{ path('event_edit', {'id': event.id}) }}">Modifier</a>
-
     {{ include('event/_delete_form.html.twig') }}
 {% endblock %}

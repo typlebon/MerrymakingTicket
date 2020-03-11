@@ -10,13 +10,7 @@
 		</div>
 	{% endfor %}
 	<div class="container-fluid mt-4">
-		<h1 id="hautPage">>Gérer les évenements</h1>
-	{% if is_granted('ROLE_SELLER') %}
-		<div class="text-right">
-			<a href="{{ path('event_new')}}" class="btn btn-primary">
-				Créer un nouvel évenement</a>
-		</div>
-	{% endif %}
+		<h1 id="hautPage">Evenements disponible</h1>
 
 			<!-- Page Content -->
 				<div class="row">
@@ -25,7 +19,7 @@
 					<!-- Team Member 1 -->
 					<div class="col">
 						<div class="card border-0 shadow">
-							<img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+							<img src="{{ asset('assets/img/dj.jpg') }}" class="card-img-top" alt="...">
 							<div class="card-body text-center">
 								<h5 class="card-title mb-0">{{ event.nameEvent }}</h5>
 								<div class="card-text text-black-50">{{ event.shortDescriptionEvent }}</div>
@@ -37,15 +31,15 @@
 
 								<div class="btn-group" role="group" aria-label="Basic example">
 									<button type="button" class="btn btn-pink btn-rounded">
-										<a href="{{ path('event_show', {'id': event.id}) }}" class="text-muted">VOIR</a>
+										<a href="{{ path('event_show', {'id': event.id}) }}" class="text-muted">👁️</a>
 									</button>
 									{% if is_granted('ROLE_SELLER') %}
 										<button type="button" class="btn btn-pink btn-rounded">
-											<a href="{{ path('event_edit', {'id': event.id}) }}" class="text-muted">MODIFIER</a>
+											<a href="{{ path('event_edit', {'id': event.id}) }}" class="text-muted">MODIF</a>
 										</button>
 									{% endif %}
 									<button type="button" class="btn btn-pink btn-rounded">
-										<a href="{{ path('cart_add', {'id':event.id} ) }}" class="text-muted">Ajouter au panier</a>
+										<a href="{{ path('cart_add', {'id':event.id} ) }}" class="text-muted"> 🛒</a>
 									</button>
 								</div>
 						</div>
@@ -53,9 +47,13 @@
 				</div>
 		{% endfor %}
 				</div>
-				<!-- /.row -->
 			</div>
-			<!-- /.container -->
+				{% if is_granted('ROLE_SELLER') %}
+		<div class="text-right">
+			<a href="{{ path('event_new')}}" class="btn btn-light">
+				Créer un nouvel évenement</a>
+		</div>
+	{% endif %}
 	</tbody>
 	</table>
 {% include 'footer.html.twig' %}

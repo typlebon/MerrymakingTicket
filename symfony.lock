@@ -1,7 +1,4 @@
 {
-    "behat/transliterator": {
-        "version": "v1.2.0"
-    },
     "cocur/slugify": {
         "version": "v3.2"
     },
@@ -128,6 +125,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "php": {
+        "version": "7.3"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -358,11 +358,17 @@
             "./tests/.gitignore"
         ]
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.14.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.12.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.12.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.14.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.12.0"
@@ -435,8 +441,8 @@
     "symfony/stopwatch": {
         "version": "v4.4.0"
     },
-    "symfony/templating": {
-        "version": "v4.4.2"
+    "symfony/string": {
+        "version": "v5.0.4"
     },
     "symfony/test-pack": {
         "version": "v1.0.6"

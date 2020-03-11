@@ -3,36 +3,36 @@
 {% block title %}Event{% endblock %}
 
 {% block body %}
-    <h1>Event</h1>
+    <image id="panier" class="featurette-image img-fluid mx-auto" alt="petite image" src="{{ asset('assets/img/admission.jpg') }}" data-holder-rendered="true">
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Name_event</th>
-                <td>{{ event.nameEvent }}</td>
+                <th></th>
+                <td  id="nomConcert">{{ event.nameEvent }}</td>
             </tr>
             <tr>
-                <th>Short_description_event</th>
+                <th></th>
                 <td>{{ event.shortDescriptionEvent }}</td>
             </tr>
             <tr>
-                <th>Long_description_event</th>
+                <th></th>
                 <td>{{ event.longDescriptionEvent }}</td>
             </tr>
             <tr>
-                <th>Purchase_price_event</th>
+                <th></th>
                 <td>{{ event.purchasePriceEvent }}</td>
             </tr>
             <tr>
-                <th>Start_date_event</th>
+                <th></th>
                 <td>{{ event.startDateEvent ? event.startDateEvent|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>End_date_event</th>
+                <th></th>
                 <td>{{ event.endDateEvent ? event.endDateEvent|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Festival_place_event</th>
+                <th></th>
                 <td>{{ event.festivalPlaceEvent }}</td>
             </tr>
         </tbody>

@@ -112,7 +112,8 @@ class UsersController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($users);
             $entityManager->flush();
-        }
+            return $this->redirectToRoute('event_index');
+        } 
 
         return $this->redirectToRoute('users.index');
     }

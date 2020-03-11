@@ -33,8 +33,8 @@
 								<input
 								type="hidden" name="_method" value="DELETE">
 								<!-- champ qui permet de sécurisé le formulaire de suppression avec un token -->
-								<input type="hidden" name="_token" value="{{ csrf_token('user_delete' ~ user.id)}}">
-								<button class="btn btn-danger">Supprimer</button>
+								<input type="hidden" name="_token" value="{{ csrf_token('user_delete')}}"/>
+								<button class="btn btn-danger" type="submit">Supprimer</button>
 							</form>
 							<!-- champs caché -->
 						</td>

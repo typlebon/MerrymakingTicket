@@ -33,15 +33,12 @@
 								<a class="nav-link" {% if current_menu is defined and current_menu == 'event' %} active {% endif %} href="{{ path('event_index')}}">EVENEMENTS</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{ path('cart_panier')}}">PANIER</a>
+								<a class="nav-link" href="{{ path('cart_panier')}}">🛒</a>
 							</li>
 							<!-- Si utilisateur est connecté on applique la condition -->
 							{% if app.user %}
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ESPACE ADMIN</a>
-									<div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-										<a class="dropdown-item" href="{{ path('event_index')}}">EVENEMENTS</a>
-										<a class="dropdown-item" href="{{ path('users.index')}}">USERS</a>
+								<li class="nav-item">
+										<a class="nav-link" href="{{ path('users.index')}}">USERS</a>
 									</div>
 								</li>
 								<ul class="navbar-nav">

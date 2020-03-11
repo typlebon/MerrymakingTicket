@@ -101,7 +101,7 @@ class Event
 
     public function setLongDescriptionEvent(string $long_description_event): self
     {
-        $this->long_description_event = $long_description_event;
+        $this->long_description_event = htmlspecialchars($long_description_event);
 
         return $this;
     }
